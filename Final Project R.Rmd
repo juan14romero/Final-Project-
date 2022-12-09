@@ -1,0 +1,70 @@
+---
+title: "Final Project"
+author: "Juan Romero"
+date: "2022-12-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+install.packages("readxl")
+install.packages("stargazer")
+install.packages("tidyverse")
+
+library(readxl)
+library(stargazer)
+library(tidyverse)
+
+options(scipen = 999)
+```
+
+
+```{r cars}
+
+Data <- read_excel(file.choose("Final Project Data.xlsx "))
+
+#Summary Statistics 
+summary(Data)
+
+#Base Regression
+ols1 <- lm(Close~Volume + CPI + Unemployment + VIX + EPS +Cases,data=Data)
+
+
+####  REGRESSIONS AND SUMMARY STATISTICS FOR EACH SECTOR   ####
+
+#Regression and Summary Statistics for Technology Sector 
+ols_tech <- lm(Close~Volume + CPI + Unemployment + VIX + EPS +Cases,data=Data[Data$Sector=="Technology",])
+
+summary(ols_tech)
+
+
+
+#Regression and Summary Statistics for Financials Sector 
+ols_finance <- lm(Close~Volume + CPI + Unemployment + VIX + EPS +Cases,data=Data[Data$Sector=="Financials",])
+
+summary(ols_finance)
+
+
+
+#Regression and Summary Statistics for Consumer Staples Sector
+ols_cs <- lm(Close~Volume + CPI + Unemployment + VIX + EPS +Cases,data=Data[Data$Sector=="Consumer Staples",])
+
+summary(ols_cs)
+
+
+
+#Regression and Summary Statistics for Industrials Sector 
+ols_industrials <- lm(Close~Volume + CPI + Unemployment + VIX + EPS +Cases,data=Data[Data$Sector=="Industrials",])
+
+summary(ols_industrials)
+
+
+
+#Regression and Summary Statistics for Health Care Sector 
+ols_health <- lm(Close~Volume + CPI + Unemployment + VIX + EPS +Cases,data=Data[Data$Sector=="Health Care",])
+
+summary(ols_health)
+
+
+```
